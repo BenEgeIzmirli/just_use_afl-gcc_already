@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PARENT_COMMAND="$(ps -o comm= $PPID)"
+if [ "$PARENT_COMMAND" == "gcc" ] ; then
+    /usr/bin/gcc_real $@
+else
+    /usr/bin/afl-gcc -fprofile-arcs -ftest-coverage $@
+fi
